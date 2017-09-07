@@ -1,0 +1,248 @@
+﻿
+@using DoYouKnowWeb.Models
+@model OnlineIndexModel
+
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+    <!-- The Grid -->
+    <div class="w3-row-padding">
+        <!-- Left Column -->
+        <div class="w3-col m3">
+            <div class="w3-white w3-text-grey w3-card-2">
+                <div class="w3-display-container">
+                    <span class="w3-button w3-xlarge w3-hover-grey w3-display-topright" title="Settings" style="color:white; border-radius:10%;"><span class="glyphicon glyphicon-cog"></span></span>
+                    <div class="w3-container">
+
+                        <span onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-xlarge w3-hover-grey w3-display-topright" title="Settings" style="color:white; border-radius:10%;"><span class="glyphicon glyphicon-cog"></span></span>
+                        <div id="id01" class="w3-modal">
+
+                            <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+
+                                <header class="w3-container" style="background-color:#3949AB;">
+                                    <span onclick="document.getElementById('id01').style.display='none'"
+                                          class="w3-button w3-xlarge w3-display-topright" style="background-color:#5C6BC0; color:white;">&times;</span>
+                                    <h2 style="color:white;">Setting</h2>
+                                </header>
+                                <div class="w3-bar w3-border-bottom">
+                                    <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'Profile')">Profile</button>
+                                    <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'DoYouKnow')">DoYouKnow</button>
+                                </div>
+@using (Html.BeginForm("SettingModel","Online",FormMethod.Post,new { Id = @Model.usr.Id }))
+{
+                                <div id="Profile" class="w3-container city" style="background-color:gainsboro;">
+                                    
+                                    <h1>Profile</h1>
+
+                                    <div class="card " style="width:150px;">
+                                        <div class="container">
+                                            
+                                                <div class="col-sm-3">
+                                                    @{
+                                                        bool isThereSettingProfileImage = Model.usr.Image == null ? false : true;
+
+                                                        if (isThereSettingProfileImage)
+                                                        {
+                                                            //eğer foto var ise veritabanında onu göster kodu yazılacak
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="~/Resources/images/defaultProfile.png" class="img-thumbnail" alt="Avatar" style=" width:150px; background-color:white;">
+                                                        }
+                                                    }
+
+                                                    <br />
+                                                    <br />
+
+                                                    <input type="file" value="Update Photo" name="updatePhoto" />
+
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <label>Name</label><br />
+                                                    <input placeholder="Muhammed" id="changeName" type="text" name="name"/>
+                                                    <br />
+                                                    <br />
+                                                    <label>Surname</label><br />
+                                                    <input placeholder="Pektaş" id="changeSurname" type="text"  name="surname"/>
+                                                    <br />
+                                                    <br />
+                                                    <label>Birthday</label><br />
+                                                    <input placeholder="30 Kasım 1996" id="changeBirthday" name="birthday" onclick="document.getElementById('profileBirthday').innerHTML='15 Kasım 1996';" />
+                                                </div>
+
+                                        </div>
+                                        <br />
+                                    </div>
+                                                        
+                                </div>
+                                <div id="DoYouKnow" class="w3-container city" style="background-color:gainsboro;">
+                                    <h1>DoYouKnow</h1>
+                                    <p>
+                                        Planlarda , etkinliklerde, organizasyonlarda defalarca
+                                        sorulan soruları  sizin yerinize cevaplayan, bir platform .
+                                    </p>
+                                    <p><i> Contact :<b>mhmdpkts@hotmail.com</b></i></p>
+                                </div>
+                                                       
+                                <div class="w3-container w3-light-grey w3-padding">
+
+                                    <input type="submit" class="w3-btn w3-right w3-white w3-border" name="logOut" value="LogOut"
+                                           onclick="document.getElementById('id01').style.display='none'" />
+
+                                    <input type="submit" class="w3-btn w3-right w3-white w3-border" value="Save" name="saveProfile"
+                                           onclick="document.getElementById('id01').style.display='none'" />
+
+                                </div>
+                                                        }                  
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <script>
+                        document.getElementsByClassName("tablink")[0].click();
+                        function openCity(evt, cityName) {
+                            var i, x, tablinks;
+                            x = document.getElementsByClassName("city");
+                            for (i = 0; i < x.length; i++) {
+                                x[i].style.display = "none";
+                            }
+                            tablinks = document.getElementsByClassName("tablink");
+                            for (i = 0; i < x.length; i++) {
+                                tablinks[i].classList.remove("w3-light-grey");
+                            }
+                            document.getElementById(cityName).style.display = "block";
+                            evt.currentTarget.classList.add("w3-light-grey");
+                        }
+                    </script>
+                    @{
+                        bool isThereMainProfileImage = Model.usr.Image == null ? false : true;
+
+                        if (isThereMainProfileImage)
+                        {
+                            //eğer foto var ise veritabanında onu göster kodu yazılacak
+                        }
+                        else
+                        {
+                            <img src="~/Resources/images/defaultProfile.png" style="width:100%;  border-radius:10%; height:320px;" alt="Avatar">
+                        }
+                    }
+                    <br />
+                    <br />
+
+                </div>
+                <div class="w3-container">
+                    @using (Html.BeginForm("FollowedList", "Online"))
+                    {
+                        int fllwdCount;
+                        int fllwrCount;
+                        string birthdate = Model.usr.Birthday.ToShortDateString();
+
+                        if (Model.usr.FollowedList == null && Model.usr.FollowerList == null)
+                        {
+                            fllwdCount = 0;
+                            fllwrCount = 0;
+                        }
+                        else
+                        {
+                            fllwdCount = Model.usr.FollowedList.Count;
+                            fllwrCount = Model.usr.FollowerList.Count;
+                        }
+
+
+                        <p id="profileNameSurname"><span class="glyphicon glyphicon-user fa-fw w3-margin-right w3-large w3-text-teal"></span>@Model.usr.Name @Model.usr.Surname</p>
+                        <p id="profileBirthday"><span class="glyphicon glyphicon-user fa-fw w3-margin-right w3-large w3-text-teal"></span>@birthdate</p>
+                        <p><span class="glyphicon glyphicon-chevron-up fa-fw w3-margin-right w3-large w3-text-teal"></span>Followed  <button type="submit" class="w3-tag w3-round w3-blue w3-border w3-border-white">@fllwdCount</button></p>
+                        <p><span class="glyphicon glyphicon-chevron-down fa-fw w3-margin-right w3-large w3-text-teal"></span>Follower  <button class="w3-tag w3-round w3-blue w3-border w3-border-white">@fllwrCount</button></p>
+                        <hr>
+                    }
+                </div>
+            </div>
+            <br>
+        </div>
+        <div class="w3-col m6">
+            <div class="w3-container w3-card-2 w3-white">
+                @{
+                    <h2 class="w3-text-grey w3-padding-8"><i class="glyphicon glyphicon-comment fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Chating</h2>
+                    if (Model.cache == 2)
+                    {
+                        <ul class="w3-ul w3-card-4">
+                            <li class="w3-padding-16">
+                                <img src="~/Resources/images/group.png" class="w3-left w3-circle w3-margin-right" style="width:55px">
+                                <span class="w3-large">Bizimkiler</span><br />
+                                <span>Okul</span>
+                            </li>
+                        </ul>
+                        <hr />
+                        <div class="col-sm-12" style="height:350px;">
+                            <iframe style="width:600px; height:350px;" src='https://webchat.botframework.com/embed/doyouknowbot?s=TKzUXxb1Lwg.cwA.ujw.1NOkan9nMKtRU_rkxN5-WRTQT5zyG_GvaGa4apsK9kE'></iframe>
+                        </div>
+                    }
+                    else
+                    {
+                        <br />
+                        <p>Soru sormak istediğiniz gruba tıklarsanız bu bölümde sorularınızı sorarak cevap alabileceksiniz..</p>
+                        <br />
+                        <img src="~/Resources/images/logo.png" style="margin-left:20%;" />
+                    }
+                }
+            </div>
+        </div>
+        <div class="w3-col m3">
+            @using (Html.BeginForm("Members", "Online", FormMethod.Post))
+            {
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="username">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                </div>
+            }
+            <div class="w3-container w3-card-2 w3-white" style="height:480px;">
+                <h2 class="w3-text-grey w3-padding-16"><i class="glyphicon glyphicon-list fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>MyGroups</h2>
+                @{
+                    if (Model.cache == 1 || Model.cache == 2)
+                    {
+                        <ul class="w3-ul w3-card-4">
+                            <li class="w3-padding-16">
+                                <button class="w3-button w3-blue w3-xlarge w3-right" style="border-radius:20%;" onclick="document.getElementById('id02').style.display='block'">+</button>
+                                @using (Html.BeginForm("ChatCache", "Online"))
+                                {
+                                    <button type="submit" class="btn btn btn-default" style="background-color:white; width:90px; ">
+                                        <img src="~/Resources/images/group.png" class="w3-left w3-circle w3-margin-right" style="width:55px;">
+                                    </button>
+                                    <span class="w3-large" style="text-align:center;">Bizimkiler</span><br>
+
+                                }
+                            </li>
+                        </ul>
+                        <br />
+                    }
+                }
+                <div id="id02" class="w3-modal">
+                    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:250px; text-align:center; background-color:#64B5F6; border-radius:10%;">
+                        <div class="w3-center">
+                            <br>
+                            <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+                            <h3 style="color:black;">Subject Entry</h3>
+                        </div>
+                        @using (Html.BeginForm("Index", "Online", FormMethod.Post, new { @class = "login-form" }))
+                        {
+                            <div class="w3-section">
+                                <label><b>Subject</b></label>
+                                <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Subject" name="subject" style="text-align:center;" required>
+                                <label><b>Place</b></label>
+                                <input class="w3-input w3-border" type="text" placeholder="Enter Place" name="place" style="text-align:center;" required>
+                                <label><b>Time</b></label>
+                                <input class="w3-input w3-border" type="text" placeholder="Enter Time" name="time" style="text-align:center;" required>
+                                <button class="w3-button w3-block w3-blue w3-section w3-padding" type="submit" name="save">Save</button>
+                                <button onclick="document.getElementById('id02').style.display='none'" type="button" class="w3-button w3-red" name="cancel">Cancel</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "LogIn";
+}
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div class="col-sm-6"></div>
+    <div class="carousel-caption" style="top:150px;">
+        <div class="col-sm-6">
+            <h1 style="margin-left:-150px;">İletişimde olduğunuz kişilerle grup oluşturuyorsunuz , planlarınızı ekliyorsunuz ve DoYouKnow sizin yerinize soruları cevaplıyor.</h1>
+        </div>
+        <div class="col-sm-4" style="margin-left:100px;">
+            <div class="form-group" style="background-color:#B0BEC5; border-radius:10%; padding:5%;">
+                @using (Html.BeginForm("LogIn", "Home", FormMethod.Post))
+                {
+                    <input class="form-control" type="text" placeholder="Username" name="username" />
+                        <br />
+                        <input class="form-control" type="password" placeholder="Password" name="password" />
+                        <br />
+                        <input class="w3-button w3-blue w3-large" type="submit" value="LogIn" style="border-radius:10%; width:100px;" />
+                }
+                <br />
+                <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-indigo w3-large" style="border-radius:10%; width:100px; ">SignUp</button>
+                <div class="w3-container">
+                    <div id="id01" class="w3-modal">
+                        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:280px; background-color:#64B5F6; border-radius:5%;">
+                            <div class="w3-center">
+                                <br>
+                                <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+                            </div>
+
+                            @using (Html.BeginForm("SignUp", "Home", FormMethod.Post, new { @style = "color: white;" }))
+                            {
+
+                                <div class="w3-section">
+                                    <b>Name</b>
+                                    <input class="w3-input w3-border w3-margin-bottom  w3-center" style="color:black;" type="text" placeholder="Enter Name" name="name" required>
+                                    <b>Surname</b>
+                                    <input class="w3-input w3-border w3-center" type="text" style="color:black;" placeholder="Enter Surname" name="surname" required>
+                                    <b>Email</b>
+                                    <input class="w3-input w3-border w3-center" type="email" style="color:black;" placeholder="Enter Email" name="Email" required>
+                                    <b>Username</b>
+                                    <input class="w3-input w3-border w3-margin-bottom  w3-center" style="color:black;" type="text" placeholder="Enter Username" name="username" required>
+                                    <b>Password</b>
+                                    <input class="w3-input w3-border w3-center" type="password" style="color:black;" placeholder="Enter Password" name="password" required>
+                                    <button class="w3-button w3-block w3-blue w3-section w3-padding" type="submit" name="signup">SignUp</button>
+                                    <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red" name="cancel">Cancel</button>
+                                </div>
+
+                            }
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="~/Resources/images/crowd-2361583_1920.jpg" alt="" style="width:100%; height:100%;">
+        </div>
+        <div class="item">
+            <img src="~/Resources/images/calourselimg.jpg" alt="" style="width:100%; height:100%;">
+        </div>
+        <div class="item">
+            <img src="~/Resources/images/carouselimg3.jpg" alt="New york" style="width:100%; height:100%;">
+        </div>
+    </div>
+</div>

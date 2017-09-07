@@ -1,0 +1,79 @@
+﻿
+@using DoYouKnowWeb.Database
+@model List<User>
+
+<div class="container">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+        @{
+            if (ViewBag.title == "Members")
+            {
+                <div class="w3-container w3-card-2 w3-white w3-padding-32">
+                    <h2 class="w3-text-grey w3-padding-16"><i class="glyphicon glyphicon-comment fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>@ViewBag.title</h2>
+                    <ul class="w3-ul w3-card-4">
+                        @foreach (var item in Model)
+                        {
+                            <li class="w3-padding-8" style="height:70px;">
+                                <img src="~/Resources/ProfileImages/profile.jpg" class="w3-left w3-circle w3-margin-right" style="width:50px">
+                                <span class="w3-large">@item.Name @item.Surname</span>
+                                <input class="w3-check w3-right" type="checkbox" name="check">
+
+                            </li>
+                        }
+                    </ul>
+                    <hr />
+                </div>
+            }
+            else
+            {
+                <div class="w3-container w3-card-2 w3-white w3-padding-32">
+                    <h2 class="w3-text-grey w3-padding-16"><i class="glyphicon glyphicon-comment fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>@ViewBag.title</h2>
+                    <ul class="w3-ul w3-card-4">
+                        <li class="w3-padding-8" style="height:70px;">
+                            <input class="w3-check w3-right" type="checkbox" name="check">
+                            <img src="~/Resources/ProfileImages/ufuk.jpg" class="w3-left w3-circle w3-margin-right" style="width:50px">
+                            <span class="w3-large">Ufuk Anteplioğlu</span>
+                        </li>
+                        <li class="w3-padding-8" style="height:70px;">
+                            <input class="w3-check w3-right" type="checkbox" name="check">
+                            <img src="~/Resources/ProfileImages/cevher.jpg" class="w3-left w3-circle w3-margin-right" style="width:50px">
+                            <span class="w3-large">Cevher Söylemez</span>
+                        </li>
+                        <li class="w3-padding-8" style="height:70px;">
+                            <input class="w3-check w3-right" type="checkbox" name="check">
+                            <img src="~/Resources/ProfileImages/taha.jpg" class="w3-left w3-circle w3-margin-right" style="width:50px">
+                            <span class="w3-large">Taha Altınışık</span>
+                        </li>
+                        <li class="w3-padding-8" style="height:70px;">
+                            <input class="w3-check w3-right" type="checkbox" name="check">
+                            <img src="~/Resources/ProfileImages/hamit.jpg" class="w3-left w3-circle w3-margin-right" style="width:50px">
+                            <span class="w3-large">Hamitcan Uzunay</span>
+                        </li>
+                    </ul>
+                    <button class="w3-button w3-block w3-blue w3-section w3-padding" onclick="document.getElementById('id03').style.display = 'block';" type="submit" name="create">Create Group</button>
+                    <div id="id03" class="w3-modal">
+                        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:250px; text-align:center; background-color:#64B5F6; border-radius:10%;">
+                             <div class="w3-center">
+                                <br>
+                                <span onclick="document.getElementById('id03').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+                                <h3 style="color:black;">Subject Entry</h3>
+                            </div>
+                            <div class="w3-section">
+                                <label><b>Group Name</b></label>
+                                <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Group Name" name="groupname" style="text-align:center;" required>
+                                <label><b>Description</b></label>
+                                <input class="w3-input w3-border" type="text" placeholder="Enter Group Description" name="grupdescription" style="text-align:center;" required>
+                                @using (Html.BeginForm("GroupCache", "Online"))
+                                {
+                                    <button class="w3-button w3-block w3-blue w3-section w3-padding" type="submit" name="save">Ok</button>
+                                }
+                                <button onclick="document.getElementById('id03').style.display='none'" type="button" class="w3-button w3-red" name="cancel">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+            }
+        }
+    </div>
+</div>
