@@ -2,6 +2,7 @@
 using DoYouKnowWeb.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -30,7 +31,7 @@ namespace DoYouKnowWeb.Controllers
             }
         }
 
-        public ActionResult SettingModel(string saveProfile, string logOut, string updatePhoto, int Id, string name, string surname, string birthday)
+        public ActionResult SettingModel(string saveProfile, string logOut, HttpPostedFileBase updatePhoto, int Id, string name, string surname, string birthday)
         {
             MyUser usr;
             if (saveProfile != "" && saveProfile != null)
@@ -51,10 +52,21 @@ namespace DoYouKnowWeb.Controllers
                         usr.Birthday = usr.Birthday;
 
                     }
+                    db.SaveChanges();
                 }
 
-                if (updatePhoto != "" && updatePhoto != null)
+                if (updatePhoto != null && updatePhoto.ContentLength>0)
                 {
+                    ImageConverter imgConvrt = new ImageConverter();
+                    byte[] byt = (byte[]) imgConvrt.ConvertTo(updatePhoto, typeof(byte[]));
+
+                    using (DoYouKnowDBLastVersion db = new DoYouKnowDBLastVersion())
+                    {
+                        usr.Image = byt;
+                        db.SaveChanges();    
+                    }
+
+
                     //secilen profil photo veritabanına yazılacak..
                     return RedirectToAction("Index", "Online", new { userId = Id });//şidilik
                 }

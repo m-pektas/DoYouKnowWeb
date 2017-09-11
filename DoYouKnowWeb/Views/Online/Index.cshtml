@@ -16,7 +16,6 @@
                         <div id="id01" class="w3-modal">
 
                             <div class="w3-modal-content w3-card-4 w3-animate-zoom">
-
                                 <header class="w3-container" style="background-color:#3949AB;">
                                     <span onclick="document.getElementById('id01').style.display='none'"
                                           class="w3-button w3-xlarge w3-display-topright" style="background-color:#5C6BC0; color:white;">&times;</span>
@@ -26,15 +25,15 @@
                                     <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'Profile')">Profile</button>
                                     <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'DoYouKnow')">DoYouKnow</button>
                                 </div>
-@using (Html.BeginForm("SettingModel","Online",FormMethod.Post,new { Id = @Model.usr.Id }))
-{
-                                <div id="Profile" class="w3-container city" style="background-color:gainsboro;">
-                                    
-                                    <h1>Profile</h1>
+                                @using (Html.BeginForm("SettingModel", "Online", FormMethod.Post, new { Id = @Model.usr.Id }))
+                                {
+                                    <div id="Profile" class="w3-container city" style="background-color:gainsboro;">
 
-                                    <div class="card " style="width:150px;">
-                                        <div class="container">
-                                            
+                                        <h1>Profile</h1>
+
+                                        <div class="card " style="width:150px;">
+                                            <div class="container">
+
                                                 <div class="col-sm-3">
                                                     @{
                                                         bool isThereSettingProfileImage = Model.usr.Image == null ? false : true;
@@ -57,41 +56,41 @@
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <label>Name</label><br />
-                                                    <input placeholder="Muhammed" id="changeName" type="text" name="name"/>
+                                                    <input placeholder="Muhammed" id="changeName" type="text" name="name" />
                                                     <br />
                                                     <br />
                                                     <label>Surname</label><br />
-                                                    <input placeholder="Pektaş" id="changeSurname" type="text"  name="surname"/>
+                                                    <input placeholder="Pektaş" id="changeSurname" type="text" name="surname" />
                                                     <br />
                                                     <br />
                                                     <label>Birthday</label><br />
                                                     <input placeholder="30 Kasım 1996" id="changeBirthday" name="birthday" onclick="document.getElementById('profileBirthday').innerHTML='15 Kasım 1996';" />
                                                 </div>
 
+                                            </div>
+                                            <br />
                                         </div>
-                                        <br />
+
                                     </div>
-                                                        
-                                </div>
-                                <div id="DoYouKnow" class="w3-container city" style="background-color:gainsboro;">
-                                    <h1>DoYouKnow</h1>
-                                    <p>
-                                        Planlarda , etkinliklerde, organizasyonlarda defalarca
-                                        sorulan soruları  sizin yerinize cevaplayan, bir platform .
-                                    </p>
-                                    <p><i> Contact :<b>mhmdpkts@hotmail.com</b></i></p>
-                                </div>
-                                                       
-                                <div class="w3-container w3-light-grey w3-padding">
+                                    <div id="DoYouKnow" class="w3-container city" style="background-color:gainsboro;">
+                                        <h1>DoYouKnow</h1>
+                                        <p>
+                                            Planlarda , etkinliklerde, organizasyonlarda defalarca
+                                            sorulan soruları  sizin yerinize cevaplayan, bir platform .
+                                        </p>
+                                        <p><i> Contact :<b>mhmdpkts@hotmail.com</b></i></p>
+                                    </div>
 
-                                    <input type="submit" class="w3-btn w3-right w3-white w3-border" name="logOut" value="LogOut"
-                                           onclick="document.getElementById('id01').style.display='none'" />
+                                    <div class="w3-container w3-light-grey w3-padding">
 
-                                    <input type="submit" class="w3-btn w3-right w3-white w3-border" value="Save" name="saveProfile"
-                                           onclick="document.getElementById('id01').style.display='none'" />
+                                        <input type="submit" class="w3-btn w3-right w3-white w3-border" name="logOut" value="LogOut"
+                                               onclick="document.getElementById('id01').style.display='none'" />
 
-                                </div>
-                                                        }                  
+                                        <input type="submit" class="w3-btn w3-right w3-white w3-border" value="Save" name="saveProfile"
+                                               onclick="document.getElementById('id01').style.display='none'" />
+
+                                    </div>
+                                                        }
                             </div>
 
                         </div>
