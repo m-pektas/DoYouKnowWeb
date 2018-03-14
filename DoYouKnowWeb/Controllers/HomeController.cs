@@ -76,8 +76,8 @@ namespace DoYouKnowWeb.Controllers
             db.MyUser.Add(myusr);
             db.SaveChanges();
 
-            usrlgn.userName = "mhmdpkts";
-            usrlgn.password = "bulancak28";
+            usrlgn.userName = "username";
+            usrlgn.password = "password";
             usrlgn.UserId = 1;
             db.UserLogin.Add(usrlgn);
             db.SaveChanges();
